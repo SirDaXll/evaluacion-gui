@@ -8,22 +8,26 @@
 class Medida():
     def __init__(self, nombreMedida, valorMedida):
         self.nombreMedida = nombreMedida.lower()
-        self.valorMedida = int(valorMedida)
+        self.valorMedida = float(valorMedida)
         if self.nombreMedida == 'galones':
-            self.equivalenteA1Lt = int(0,26)
+            self.equivalenteA1Lt = float(0,26)
         elif self.nombreMedida == 'pintas':
-            self.equivalenteA1Lt = int(2,11)
+            self.equivalenteA1Lt = float(2,11)
         self.valorEquivalente = self.valorMedida/self.equivalenteA1Lt
 
     def __str__(self):
-        return f'{self.nombreMedida}: {self.valorMedida} ({self.valorEquivalente} Lt)'
+        resultado = (f'{self.valorEquivalente} Lt')
+        return resultado
     
     def comparar(self):
         x1 = 0
         x2 = 0
         if x1 < x2:
-            print(f'{x1} < {x2}')
+            comparacion = (f'{x1} < {x2}')
+            return comparacion
         elif x1 > x2:
-            print(f'{x1} > {x2}')
+            comparacion = (f'{x1} > {x2}')
+            return comparacion
         elif x1 == x2:
-            print(f'{x1} = {x2}')
+            comparacion = (f'{x1} = {x2}')
+            return comparacion
