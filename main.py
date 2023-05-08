@@ -13,21 +13,21 @@ class Medida():
             self.equivalenteA1Lt = float(0,26)
         elif self.nombreMedida == 'pintas':
             self.equivalenteA1Lt = float(2,11)
+
         self.valorEquivalente = self.valorMedida/self.equivalenteA1Lt
 
-    def __str__(self):
         resultado = (f'{self.valorEquivalente} Lt')
         return resultado
-    
+        # self.ventana.setText(resultado)
+
     def comparar(self):
-        x1 = 0
-        x2 = 0
-        if x1 < x2:
-            comparacion = (f'{x1} < {x2}')
+        if self.izquierda < self.derecha:
+            comparacion = (f'<')
             return comparacion
-        elif x1 > x2:
-            comparacion = (f'{x1} > {x2}')
+        elif self.izquierda > self.derecha:
+            comparacion = (f'>')
             return comparacion
-        elif x1 == x2:
-            comparacion = (f'{x1} = {x2}')
+        elif self.izquierda == self.derecha:
+            comparacion = (f'=')
             return comparacion
+        # self.ventana.setText(comparacion)
