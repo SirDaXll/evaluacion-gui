@@ -50,6 +50,7 @@ class VentanaPrincipal(QWidget):
         self.botonComparar.clicked.connect(self.comparar)
 
     def agregarDatos(self, objeto):
+        self.setWindowTitle("Ingresar datos")
         ventanaDatos = QDialog(self)
         layoutDatos = QVBoxLayout(ventanaDatos)
         labelNombre = QLabel('Ingrese el nombre de la medida')
