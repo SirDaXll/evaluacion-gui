@@ -1,6 +1,6 @@
 import sys
 from PyQt6.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QHBoxLayout, QVBoxLayout, QDialog, QLineEdit, QMessageBox
-
+from medida import Medida
 
 class VentanaPrincipal(QWidget):
     def __init__(self):
@@ -21,14 +21,18 @@ class VentanaPrincipal(QWidget):
         self.texto_valor2 = QLabel('')
         self.boton_agregar_datos1 = QPushButton('Agregar datos')
         self.boton_agregar_datos2 = QPushButton('Agregar datos')
-        self.signo_comparacion = QLabel('>')
+        self.signo_comparacion = QLabel(" ")
 
         self.vbox1.addWidget(self.texto_objeto1)
         self.vbox1.addWidget(QLabel('Cantidad:'))
         self.vbox1.addWidget(self.texto_valor1)
+        self.vbox1.addWidget(QLabel('Valor equivalente en litros:'))
+        self.vbox1.addWidget(self.texto_valor1)
         self.vbox1.addWidget(self.boton_agregar_datos1)
         self.vbox2.addWidget(self.texto_objeto2)
         self.vbox2.addWidget(QLabel('Cantidad:'))
+        self.vbox2.addWidget(self.texto_valor2)
+        self.vbox2.addWidget(QLabel('Valor equivalente en litros:'))
         self.vbox2.addWidget(self.texto_valor2)
         self.vbox2.addWidget(self.boton_agregar_datos2)
         self.hbox.addLayout(self.vbox1)
@@ -47,7 +51,7 @@ class VentanaPrincipal(QWidget):
 
         self.boton_agregar_datos1.clicked.connect(lambda: self.agregarDatos(1))
         self.boton_agregar_datos2.clicked.connect(lambda: self.agregarDatos(2))
-        self.botonComparar.clicked.connect(self.comparar)
+        self.botonComparar.clicked.connect(lambda: self.comparar(self.medida1, self.medida2))
 
     def agregarDatos(self, objeto):
         self.setWindowTitle("Ingresar datos")
@@ -73,19 +77,22 @@ class VentanaPrincipal(QWidget):
         if objeto == 1:
             self.texto_objeto1.setText(nombre)
             self.texto_valor1.setText(cantidad)
+            self.medida1 = Medida(nombre, cantidad)
         else:
             self.texto_objeto2.setText(nombre)
             self.texto_valor2.setText(cantidad)
+            self.medida2 = Medida(nombre, cantidad)
 
-    def comparar(self):
-        valor1 = int(self.texto_valor1.text())
-        valor2 = int(self.texto_valor2.text())
-        if valor1 > valor2:
-            self.signo_comparacion.setText('>')
-        elif valor1 < valor2:
-            self.signo_comparacion.setText('<')
+
+    def comparar(self, medida1, medida2):
+        if medida1.valorEquivalente < medida2.valorEquivalente:
+            comparacion = "<"
+        elif medida1.valorEquivalente > medida2.valorEquivalente:
+            comparacion = ">"
         else:
-            self.signo_comparacion.setText('=')
+            comparacion = "="
+        self.signo_comparacion.setText(comparacion)
+
    
 
 
